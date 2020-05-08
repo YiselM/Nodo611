@@ -406,11 +406,16 @@ top: 370px;
 
     <!-- aquí estan la mayor parte de las funciones que hacen que la página sea dinámica--->
     <script>
-        //Para obtener si esta logueado desde el servidor principal
         window.addEventListener('message', function (e) {
+            console.log("mensaje entrando:" + e.data)
             const validation = e.data;
+            localStorage.removeItem('message');
             localStorage.setItem('message', validation);
         });
+        setInterval(() => {
+            localStorage.removeItem('message');
+        }, 60000);
+
         let message = false
         var cont = 1
         function repetir() {
@@ -434,9 +439,9 @@ top: 370px;
         // Coloca el switch como disabled dependiendo de si está en modo 5 o no
         // Y además si está logueado coloca como disabled para que no se realizen acciones
         function modo5() {
-
-            if (localStorage.getItem('message')) {
-                console.log("Esta logueado")
+            const validation = localStorage.getItem('message') == "true" ? true : false
+            console.log(validation)
+            if (validation) {
                 //console.log( $("#estados").text() == 5)
                 if ($("#estados").text() == 4 || $("#estados").text() == 5) {
                     //console.log("Permitido")

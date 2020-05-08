@@ -158,6 +158,6 @@ app.get('/SwitchF', (req, res) => {
     });
 });
 // ----------------------------------
-app.listen(3004 || process.env.PORT, function () {
+app.listen(process.env.PORT || 3000, function () {
     console.log("Running server too")
 });

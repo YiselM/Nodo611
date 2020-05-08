@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Red UniGrid</title>
+
+    <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <!-- stylesheets -->
+
+    <link href="assets/bootstrap/bootstrap4-alpha3.min.css" rel="stylesheet">
+    <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/style1.css" rel="stylesheet">
+
+    <!-- scripts -->
+    <script src="assets/jquery/jquery-3.1.0.min.js"></script>
+    <script src="assets/tether/tether.min.js"></script>
+    <script src="assets/bootstrap/bootstrap4-alpha3.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="assets/web-analytics/overview.js"></script>
+
+    <!--datetimepicker-->
+    <link href="bootstrapv3/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+</head>
+
+<body>
+
+    <!--navbar-->
+    <nav class="navbar navbar-fixed-top" id="header">
+        <div class="container-fluid">
+            <div class="navbar-header">
+
+                <div class="brand">
+                    <a href="main_page.html">
+                        <span class="hidden-xs-down m-r-3" style="margin-left:40px;">Nodo 611</span>
+                        <span class="lead" style="margin-left:40px;"><i class="fa fa-home fa-md fa-fw"
+                                aria-hidden="true"></i>Principal</span>
+                    </a>
+
+                    <a href="historicos.html">
+                        <span class="lead" style="margin-left:40px;"><i class="fa fa-line-chart fa-md fa-fw"
+                                aria-hidden="true"></i>Gráficas</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- page-content-wrapper -->
+
+
+    <div class="page-content-toggle" id="page-content-wrapper">
+        <div class="container-fluid" id="main" style="position: absolute; left: 250px;top: 10px;">
+
+
+            <!--cuadro superior derecho con la info de facturación, mes y precio $wh-->
+            <div class="container justify-content" style="align-content: center; padding-left: 130px">
+                <div class="cd_costos">
+                    <div class="card-body">
+                        <p></p>
+
+                        <p class="card-text"
+                            style="text-align:left;font-weight: 600; font-size: 16px;line-height: 30px; color: #34495E; position: absolute;width: 57px;height: 24px;left: 25px; top: 10px;">
+                            Costos</p>
+
+                        <p class="card-text"
+                            style="text-align:left;font-weight: 500; font-size: 14px;line-height: 21px; color: #34495E; position: absolute;width: 57px;height: 24px;left: 25px;top: 35px;">
+                            Mes</p>
+                        <p class="card-text"
+                            style="text-align:left;font-weight: 500; font-size: 14px;line-height: 21px; color: #A8A8A8; position: absolute;width: 57px;height: 24px;left: 180px;top: 35px;">
+                            Octubre</p>
+                        <div class="rectangle">
+                        </div>
+                        <p class="card-text"
+                            style="text-align:left;font-weight: 500; font-size: 14px;
+                                                 line-height: 21px; color: #34495E; position: absolute;width: 57px;height: 24px;left: 25px;top: 60px;">
+                            $Wh</p>
+                        <p class="card-text"
+                            style="text-align:right;font-weight: 500; font-size: 14px;
+                                                 line-height: 21px; color: #A8A8A8; position: absolute;width: 57px;height: 24px;left: 130px;top: 60px;">
+                            $</p>
+                        <p class="card-text" id="precio"
+                            style="text-align:right;font-weight: 500; font-size: 14px;
+                                                 line-height: 21px; color: #A8A8A8; position: absolute;width: 57px;height: 24px;left: 175px;top: 60px;">
+                            390,36</p>
+                        <div class="rectangle2">
+                        </div>
+                        <p class="card-text"
+                            style="text-align:left;font-weight: 500; font-size: 14px;
+                                                 line-height: 21px; color: #34495E; position: absolute;width: 300px;height: 24px;left: 25px;top: 85px;">
+                            Factura Estimada</p>
+                        <p class="card-text"
+                            style="text-align:right;font-weight: 500; font-size: 14px;
+                                                 line-height: 21px; color: #A8A8A8; position: absolute;width: 57px;height: 24px;left: 130px;top: 85px;">
+                            $</p>
+                        <p class="card-text" id="estimado"
+                            style="text-align:left;font-weight: 500; font-size: 14px;
+                                                 line-height: 21px; color: #A8A8A8; position: absolute;width: 300px;height: 24px;left: 187px;top: 85px;">
+                        </p>
+                        <p class="card-text"
+                            style="text-align:left;font-weight: 500; font-size: 14px;
+                                                 line-height: 21px; color: #34495E; position: absolute;width: 300px;height: 24px;left: 25px;top: 110px;">
+                            Factura Real</p>
+                        <p class="card-text"
+                            style="text-align:right;font-weight: 500; font-size: 14px;
+                                                 line-height: 21px; color: #A8A8A8; position: absolute;width: 57px;height: 24px;left: 130px;top: 110px;">
+                            $</p>
+                        <p class="card-text" id="real"
+                            style="text-align:left;font-weight: 500; font-size: 14px;
+                                                 line-height: 21px; color: #A8A8A8; position: absolute;width: 300px;height: 24px;left: 187px;top: 110px;">
+                        </p>
+
+                    </div>
+                </div>
+
+
+                <!--cuadro  inferior derecho donde se muestran todos los estados-->
+                <div class="cd_modos">
+                    <div class="card-body text-center">
+                        <br>
+
+                        <p class="card-text"
+                            style="text-align:left;font-weight: 600; font-size: 16px;
+                                                 line-height: 30px; 
+                                                color: #34495E;position: absolute;width: 250px;height: 24px;left: 20px;top: 10px;  ">
+                            Estado Actual</p>
+                        <div class="cd_modos2">
+                            <!--en  el espacio en blanco debajo se imprimen los estados del Nodo, se relaciona con la función .js  por el id "estados"-->
+                            <h2 class="card-text" id="estados"
+                                style="position: relative;top: 3px; color: #F25555;font-weight: 600;font-size: 22px;line-height: 36px; text-align: center">
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cd_autorizo" id="switchy">
+                    <div class="card-body">
+
+                        <p class="card-text" style="text-align:left;font-weight: 600; font-size: 16px;
+                                                 line-height: 30px; 
+                                                color: #34495E;position: absolute;
+                                                width: 250px;
+                                                height: 24px;
+                                                left: 25px;
+                                                top: 10px;">Modo 5</p>
+                        <h2 id="mensaje" style="color: A8A8A8; font-size: 12px;position: absolute;
+                                                width: 250px;
+                                                height: 24px;
+                                                left: 105px;
+                                                top: 18px;"></h2>
+
+                        <div class="switch" style="position: absolute;width: 250px;height: 24px;left: 25px;top: 50px;"
+                            name="annie">
+
+                            <label>
+                                OFF
+                                <input id="clever" type="checkbox">
+                                <span class="lever"></span>
+                                ON
+                            </label>
+                        </div>
+                        <!--Este script activa y desactiva el switch dependiendo de si está en Modo5 o no.El checkbox tiene el ID "clever"-->
+                        <script>
+                            var mensaje = document.getElementById('mensaje');
+                            var div9 = document.createElement('div9');
+
+                            $('#clever').on('change', function () {
+                                if (this.checked) {
+                                    var modo = confirm("¿Seguro que quiere cambiar al estado 5?");
+                                    if (modo == true) {
+                                        $('#clever').prop("checked", true);
+                                        console.log("ON");
+                                        $.get('/SwitchT', function (data, status) {});
+
+                                    };
+
+
+                                    if (modo == false) {
+                                        $('#clever').prop("checked", false);
+                                        console.log("OFF");
+                                        $.get('/SwitchF', function (data, status) {});
+
+                                    };
+                                } else {
+                                    var modo = confirm("¿Seguro que quieres desactivar el estado 5?");
+                                    if (modo == true) {
+                                        $('#clever').prop("checked", false);
+                                        console.log("OFF");
+                                        $.get('/SwitchF', function (data, status) {});
+
+
+                                    };
+                                    if (modo == false) {
+                                        $('#clever').prop("checked", true);
+                                        console.log("ON");
+                                        $.post('/SwitchT', {
+                                            to5: 'True'
+                                        });
+
+                                    };
+                                }
+                            });
+                        </script>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+
+
+            </div>
+
+            <!--fuentes y nodo 611-->
+
+
+
+            <!--con este header colocas el botón del estado del Nodo611 ON/OFF-->
+            <h2 style="color: #55F278; text-align: center;font-size: 26px; padding: 8px; margin: 20px;position: absolute;top: 220px;left: 415px;font-size: 30px"
+                id="on">ON</h2>
+
+            <!--Este script es para que el botón ON/OFF cambie automáticamente dependiendo de si está encendido o apagado pero todavía no funciona-->
+            <script>
+                var head_button = document.getElementById('on');
+                var div10 = document.createElement('div10');
+                if (($("#estados").text() != '5')) {
+                    //$( "$on" ).replaceWith( "OFF" );
+                    head_button = "<h2>OFF</h2>";
+                    div10.innerHTML = head_button;
+
+                };
+            </script>
+            <img src="img/red.png" alt="Red"
+                style="justify-content: center; position: absolute; top: 100px;left:100px ">
+            <div class="card-body text-center">
+                <p class="card-text" style="text-align:match-parent;font-weight: 600; font-size: 20px;
+                                                 line-height: 30px; 
+                                                color: #34495E;position: absolute;width: 250px;height: 24px;top: 200px;
+                                    left:120px;">Red</p>
+
+
+                <div class="cd_cifras1">
+
+                    <!--cada h2 con id=PXX se usa para mostrar los valores en tiempo real de la plataforma-->
+                    <h2 class="card-text" id="P11"
+                        style="position: relative;top: 3px; color: #F25555;font-weight: 600;font-size: 24px;line-height: 22px; text-align: center">
+                    </h2>
+                </div>
+            </div>
+            <h2 class="card-text"
+                style="position: absolute;top: 580px; left:530px;color: #F25555;font-weight: 600;font-size: 22px;line-height: 32px; text-align: center">
+                W</h2>
+            <img src="img/top_Arrow.png"
+                style="justify-content: center; position: absolute; top: 160px;left:190px; width: 130px;">
+
+            <img src="img/bateria.png" class="card-img-center" alt="Bateria"
+                style="justify-content: center;position: absolute; top: 490px;left:430px">
+            <div class="card-body text-center">
+                <p class="card-text" style="text-align:match-parent;font-weight: 600; font-size: 20px;
+                                                 line-height: 30px; 
+                                                color: #34495E;position: absolute;
+width: 250px;
+height: 24px;
+top: 550px;
+                                    left:440px;">Batería</p>
+
+
+
+                <div class="cd_cifras4">
+
+                    <h2 class="card-text" id="P31"
+                        style="position: relative;top: 3px; color: #F25555;font-weight: 600;font-size: 22px;line-height: 32px; text-align: center">
+                    </h2>
+                </div>
+            </div>
+            <h2 class="card-text"
+                style="position: absolute;top: 230px; left:200px;color: #F25555;font-weight: 600;font-size: 22px;line-height: 32px; text-align: center">
+                W</h2>
+            <img src="img/dobleArrow.png"
+                style="justify-content: center; position: absolute; top: 430px;left:455px; width: 40px;">
+            <div class="nodo611">
+                <img src="img/home.png" class="card-img-center" alt="Nodo"
+                    style="justify-content: center; position: absolute; top: 55px;left:60px">
+                <div class="card-body text-center">
+                    <p class="card-text" style="text-align:match-parent;font-weight: 600; font-size: 30px;
+                                                 line-height: 30px; 
+                                            position: absolute;
+width: 250px;
+height: 24px;
+top: 155px;
+                                    left:95px; color: #F25555">N611</p>
+
+
+                </div>
+            </div>
+
+            <img src="img/generador.png" class="card-img-center" alt="Generador"
+                style="justify-content: center; position: absolute; top: 450px;left:100px">
+            <div class="card-body text-center">
+                <p class="card-text" style="text-align:match-parent;font-weight: 600; font-size: 20px;
+                                                 line-height: 30px; 
+                                                color: #34495E;position: absolute;
+width: 250px;
+height: 24px;
+top: 550px;
+                                    left:100px;">Generador</p>
+
+
+                <div class="cd_cifras3">
+
+                    <h2 class="card-text" id="P51"
+                        style="position: relative;top: 3px; color: #F25555;font-weight: 600;font-size: 22px;line-height: 32px; text-align: center">
+                        0</h2>
+                </div>
+            </div>
+            <h2 class="card-text"
+                style="position: absolute;top: 400px; left:200px;color: #F25555;font-weight: 600;font-size: 22px;line-height: 32px; text-align: center">
+                W</h2>
+            <img src="img/bot_Arrow.png"
+                style="justify-content: center; position: absolute; top: 360px;left:190px; width: 130px;">
+
+
+
+            <img src="img/panel.png" class="card-img-center" alt="Panel"
+                style="justify-content: center; position: absolute; top: 270px;left:100px">
+            <div class="card-body text-center">
+                <p class="card-text" style="text-align:match-parent;font-weight: 600; font-size: 20px;
+                                                 line-height: 30px; 
+                                                color: #34495E;position: absolute;
+width: 250px;
+height: 24px;
+top: 370px;
+                                    left:115px;">Panel</p>
+
+
+                <div class="cd_cifras2">
+
+                    <h2 class="card-text" id="P21"
+                        style="position: relative;top: 3px; color: #F25555;font-weight: 600;font-size: 22px;line-height: 32px; text-align: center">
+                    </h2>
+                </div>
+            </div>
+            <h2 class="card-text"
+                style="position: absolute;top: 580px; left:200px;color: #F25555;font-weight: 600;font-size: 22px;line-height: 32px; text-align: center">
+                W</h2>
+            <img src="img/mid_Arrow.png"
+                style="justify-content: center; position: absolute; top: 270px;left:190px; width: 130px;">
+
+            <img src="img/carga.png" class="card-img-center" alt="Carga"
+                style="justify-content: center; position: absolute; top: 275px;left:825px">
+            <div class="card-body text-center">
+                <p class="card-text" style="text-align:match-parent;font-weight: 600; font-size: 20px;
+                                                 line-height: 30px; 
+                                                color: #34495E;position: absolute;
+width: 250px;
+height: 24px;
+top: 370px;
+                                    left:830px;">Carga</p>
+
+
+                <div class="cd_cifras6">
+
+                    <h2 class="card-text" id="P41"
+                        style="position: relative;top: 3px; color: #F25555;font-weight: 600;font-size: 22px;line-height: 32px; text-align: center">
+                    </h2>
+                </div>
+                <h2 class="card-text"
+                    style="position: absolute;top: 400px; left:920px;color: #F25555;font-weight: 600;font-size: 22px;line-height: 32px; text-align: center">
+                    W</h2>
+                <img src="img/mid_Arrow.png"
+                    style="justify-content: center; position: absolute; top: 270px;left:600px;width:130px;">
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+    </div>
+
+
+    <!-- aquí estan la mayor parte de las funciones que hacen que la página sea dinámica--->
+    <script>
+        var cont = 1
+
+        function repetir() {
+            console.log('entra');
+            Estado1 = Modes();
+            modo5();
+            factura();
+            Points();
+            if (cont == 2) {
+                if (div6.innerHTML == 5) {
+                    $('#clever').prop("checked", true);
+                };
+            }
+            cont = cont + 1
+
+        };
+
+
+
+
+        // Coloca el switch como disabled dependiendo de si está en modo 5 o no
+        function modo5() {
+            if (($("#estados").text() != '4') || ($("#estados").text() != '5')) {
+                $("#switchy").addClass("disable1");
+                $("#clever").attr("disabled", true);
+
+            };
+
+
+            if (($("#estados").text() == '4') || ($("#estados").text() == '5')) {
+                $("#clever").prop("disabled", false);
+                $("#switchy").removeClass("disable1");
+            };
+        };
+
+
+        var Estado = document.getElementById('estados');
+        var costo = document.getElementById('estimado');
+        var real = document.getElementById('real');
+        var div8 = document.createElement('div8');
+        var div7 = document.createElement('div7');
+        var div6 = document.createElement('div6');
+        var div1 = document.createElement('div1');
+        var div2 = document.createElement('div2');
+        var div3 = document.createElement('div3');
+        var div4 = document.createElement('div4');
+        var P11 = document.getElementById('P11');
+        var P21 = document.getElementById('P21');
+        var P31 = document.getElementById("P31");
+        var P41 = document.getElementById("P41");
+        var P51 = document.getElementById("P51");
+        var P1 = [];
+        var P2 = [];
+        var P3 = [];
+        var P4 = [];
+        var Panel = 0;
+        var Red = 0;
+        var Bateria = 0;
+        var Carga = 0;
+
+        repetir()
+
+        setInterval(repetir, 3000);
+
+
+
+        function Points() {
+            console.log('entro a Points')
+            var test = jQuery.getJSON('/GenerarActual', addData2);
+            console.log(test)
+        }
+
+        function addData2(data) {
+            console.log('entro en addData2');
+            Red = parseFloat(data[0].P1).toFixed(2)
+            Panel = parseFloat(data[0].P2).toFixed(2)
+            Bateria = parseFloat(data[0].P3).toFixed(2)
+            Carga = parseFloat(data[0].P4).toFixed(2)
+
+            console.log("data: ", data)
+            div1.innerHTML = Red;
+            console.log("div1: ", div1.innerHTML);
+            P11.appendChild(div1);
+            div2.innerHTML = Panel;
+            P21.appendChild(div2);
+            if (Bateria < 1) {
+                if (Bateria > -3) {
+                    Bateria = 0;
+                }
+            }
+            console.log(Bateria)
+            div3.innerHTML = Bateria;
+            //data[i].Bateria;	
+            P31.appendChild(div3);
+            div4.innerHTML = Carga;
+            P41.appendChild(div4);
+        }
+
+
+        // Se devuelve a estado 1 después de salir del 5
+        function Modes() {
+            //console.log('entra a modos');
+            Estado1 = jQuery.getJSON('/GenerarEstados', addData1);
+
+            console.log('DIV6', div6.innerHTML)
+
+            return Estado1
+        };
+
+        function addData1(data) {
+
+            Estado1 = parseFloat(data[0].estado);
+            div6.innerHTML = Estado1; //modo actual	
+            Estado.appendChild(div6);
+            console.log($('#estados').val())
+            console.log(document.getElementById('estados').value);
+            return Estado1
+        };
+
+
+
+        //promedio gastos de la semana
+
+        function factura() {
+            jQuery.getJSON("/GenerarWeek", addData3);
+        }
+
+        function addData3(data) {
+            //Esto recoje los datos (Semana o mes)
+            for (var i = 0; i < data.length; i++) {
+                Red = parseFloat(Red) + parseFloat(data[i].P1 * (6 /
+                    3600)) // Cada 6 o 7 segundos le llega un dato a la BD
+                Carga = parseFloat(Carga) + parseFloat(data[i].P4 * (6 / 3600))
+                //console.log("Parse"+parseFloat(data[i].P1)*(6/3600))
+            }
+
+
+
+            Precio = 0.39036;
+            Estimado = Math.round(Red * Precio);
+            Plena = Math.round(Carga * Precio);
+            console.log("La factura estimada es: ");
+            console.log("$", Estimado);
+            console.log("La factura plena es: ");
+            console.log("$", Plena)
+            div7.innerHTML = Estimado;
+            div8.innerHTML = Plena;
+            costo.appendChild(div7);
+            real.appendChild(div8);
+
+            Red = 0;
+            Carga = 0;
+        }
+    </script>
+
+</body>
+
+</html>

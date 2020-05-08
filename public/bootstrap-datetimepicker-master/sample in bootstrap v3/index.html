@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+<div class="container">
+    <br>
+        <fieldset>
+			<div class="datetime">
+                <label for="dtp_input2" class="col-md-2 control-label"></label>
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy MM dd" >
+                    <input type="text" class="form-control">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+            </div>
+        </fieldset>
+
+    
+</div>
+
+<script type="text/javascript" src="./jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript">
+   
+	$('.form_date').datetimepicker({
+        language:  'es',
+        weekStart: 0,
+        todayBtn:  false,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+        pickerPosition: "bottom-left",
+        format: 'dd-mm-yyyy',
+        endDate: new Date(),
+        startDate: "22-09-2019",
+
+
+    });
+
+   //var date = $(".datetime").data(".form_date").getDate(),
+    //formatted = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    //alert(formatted);
+
+   //date2 = [];
+   //var date2 = $('.form_date').datetimepicker("getDate");
+   //console.log(date2); 
+
+$('.form_date').datetimepicker({
+
+    format: "yyy/mm/dd",
+}).on('changeDate', function(e){
+
+    console.log(e.format());
+});
+
+</script>
+
+</body>
+</html>

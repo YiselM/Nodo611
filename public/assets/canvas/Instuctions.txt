@@ -1,0 +1,5 @@
+1. Install NodeJS
+2. main.js is the base script file of the application that has to be run.
+3. Open the command prompt, and enter the command
+   node main.js // to run the script file.
+4. Open http://localhost:8080 on your browser to see the chart.

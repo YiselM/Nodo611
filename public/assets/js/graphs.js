@@ -1,17 +1,10 @@
 window1();
 function window1 () {
-
-	//CanvasJS.addColorSet("Colors",
-                //[//colorSet Array
-                //"#009E1A",
-                //"#C92626",
-                //"#AB1EB2",
-                //"#1EA8B2"               
-                //]);
 	var dataPoints1 = [];
 	var dataPoints2 = [];
 	var dataPoints3 = [];
 	var dataPoints4 = [];
+	var dataPoints5 = [];
 	var data = [];
 	var dataPointsChar=[];
 	var dataPoints=[];
@@ -82,8 +75,18 @@ function window1 () {
 			name: "Carga",
 			dataPoints: dataPoints4
 
+		},
+		{
+			type: "spline",
+			showInLegend: true,
+			yValueFormatString: "##.00 W",
+			xValueFormatString: "hh:mm:ss TT",
+			name: "Generador",
+			dataPoints: dataPoints5
+
 		}]
 	});
+	//Pie de bateria, panel y red
 	var chart2 = new CanvasJS.Chart("chartContainer2",{
 		exportEnabled: true,
 		animationEnabled: true,
@@ -103,12 +106,11 @@ function window1 () {
 			dataPoints: dataPointsChar
 		}]
 	});
-
+	//Modo de operación
 	var chart3 = new CanvasJS.Chart("chartContainer3", {
 	exportEnabled: true,
 	animationEnabled: true,
     theme: "light2",
-    //	colorSet: "Colors",
 	title:{
 			fontFamily:"Poppins",
 			text: "Tiempo Real",
@@ -153,6 +155,12 @@ function window1 () {
 
 
 				});
+				dataPoints5.push({
+					label: data[i].datetime,
+					y: parseFloat(data[i].P5),
+
+
+				});
 			}
 
 			chart.render();
@@ -190,12 +198,22 @@ function window1 () {
 					name: "Carga",
 					dataPoints: dataPoints4
 
+				},
+					{
+					type: "spline",
+					showInLegend: true,
+					yValueFormatString: "##.00 W",
+					xValueFormatString: "hh:mm:ss TT",
+					name: "Generador",
+					dataPoints: dataPoints5
+
 				}],true)
 
 			dataPoints1=[];
 			dataPoints2=[];
 			dataPoints3=[];
 			dataPoints4=[];
+			dataPoints5=[];
 
 
 		//Draw Pie
@@ -206,6 +224,7 @@ function window1 () {
 				P2[i] = parseFloat(data[i].P2)
 				P3[i] = parseFloat(data[i].P3)
 				P4[i] = parseFloat(data[i].P4)
+				P5[i] = parseFloat(data[i].P5)
 			}
 			}
 		}
@@ -218,31 +237,22 @@ function window1 () {
 			Bateria=0;
 		}
 		Carga = Carga + P4[i];
+		Generador = Generador + P5[i];
 		}
 
 		//PARA LOS DIAS
 		Red = Math.round((Red/(P1.length))*24);
 		Panel = Math.round((Panel/(P2.length))*24);
 		Bateria = Math.round((Bateria/(P3.length))*24);
-
-		//PARA LAS SEMANAS
-		//Red = Math.round((Red/(P1.length))*168);
-		//Panel = Math.round((Panel/(P2.length))*168);
-		//Bateria = Math.round((Bateria/(P3.length))*168);
-
-		//PARA LOS MESES
-		//Red = Math.round((Red/(P1.length))*730);
-		//Panel = Math.round((Panel/(P2.length))*730);
-		//Bateria = Math.round((Bateria/(P3.length))*730);
-		//console.log(dataPoints);
-
-		dataPointsChar.push({indexLabel: "Red", y: Red, name:"Red" },{indexLabel: "Panel", y: Panel, name:"Panel"}, {indexLabel: "Bateria", y: Bateria, name:"Bateria"});
+		Generador = Math.round((Generador/(P5.length))*24);
+		dataPointsChar.push({indexLabel: "Red", y: Red, name:"Red" },{indexLabel: "Panel", y: Panel, name:"Panel"}, {indexLabel: "Bateria", y: Bateria, name:"Bateria"},{indexLabel: "Generador", y: Generador, name:"Generador"});
 		chart2.render();
 		dataPointsChar = [];
 		Red = 0;
 		Panel = 0;
 		Bateria = 0;
 		Carga = 0;
+		Generador = 0;
 
 
 		//Estados
@@ -254,9 +264,8 @@ function window1 () {
                   }  
                 }
               }
-            //console.log(state[0])  
             for(i = 0; i <state.length; i++){
-            //Aqui quiero contar cuantas veces está cada estado en el vector de arriba
+            //Aqui se cuenta cuantas veces está cada estado en el vector de arriba
             if(state[i] == 1) {
                 Estado1 = Estado1 + 1;
             } else 
@@ -274,7 +283,7 @@ function window1 () {
                             } 
             } 
  
-            //Aquí el calculo del promedio de los estados y eso 
+            //Aquí se realiza el calculo del promedio de los estados 
             S1 = Math.round((Estado1/(state.length))*100);
             S2 = Math.round((Estado2/(state.length))*100);
             S3 = Math.round((Estado3/(state.length))*100);
@@ -282,7 +291,6 @@ function window1 () {
             S5 = Math.round((Estado5/(state.length))*100);
 
             dataPoints.push({indexLabel: "Estado 1", y: S1, name:"Estado 1" },{indexLabel: "Estado 2", y: S2, name:"Estado 2"},{indexLabel: "Estado 3", y: S3, name:"Estado 3"},{indexLabel: "Estado 4", y: S4, name:"Estado 4"}, {indexLabel: "Estado 5", y: S5, name:"Estado 5"}); 
-            //console.log(dataPoints);
             chart3.render();
             dataPoints = [];
             Estado1 = 0;
@@ -299,10 +307,12 @@ function window1 () {
 	var P2 = [];
 	var P3 = [];
 	var P4 = [];
+	var P5 = [];
 	var Red = 0;
 	var Panel = 0;
 	var Bateria = 0;
 	var Carga = 0;
+	var Generador = 0;
 	var tot = 0;
 
 
@@ -329,6 +339,7 @@ function window2 () {
 	var dataPoints2 = [];
 	var dataPoints3 = [];
 	var dataPoints4 = [];
+	var dataPoints5 = [];
 	var dataPoints = [];
 	var data = [];
 	var dataPointsChar=[];
@@ -399,8 +410,18 @@ function window2 () {
 			name: "Carga",
 			dataPoints: dataPoints4
 
+		},
+			{
+			type: "spline",
+			showInLegend: true,
+			yValueFormatString: "##.00 W",
+			xValueFormatString: "hh:mm:ss TT",
+			name: "Generador",
+			dataPoints: dataPoints5
+
 		}]
 	});
+	//Pie de bateria
 	var chart2 = new CanvasJS.Chart("chartContainer2",{
 		exportEnabled: true,
 		animationEnabled: true,
@@ -420,12 +441,11 @@ function window2 () {
 			dataPoints: dataPointsChar
 		}]
 	});
-
+	//Estados
 	var chart3 = new CanvasJS.Chart("chartContainer3", {
 	exportEnabled: true,
 	animationEnabled: true,
     theme: "light2",
-    //	colorSet: "Colors",
 	title:{
 			fontFamily:"Poppins",
 			text: "Ultimas 24 horas",
@@ -470,6 +490,12 @@ function window2 () {
 
 
 				});
+				dataPoints5.push({
+					label: data[i].datetime,
+					y: parseFloat(data[i].P5),
+
+
+				});
 			}
 
 			chart.render();
@@ -507,12 +533,22 @@ function window2 () {
 					name: "Carga",
 					dataPoints: dataPoints4
 
+				},
+					{
+					type: "spline",
+					showInLegend: true,
+					yValueFormatString: "##.00 W",
+					xValueFormatString: "hh:mm:ss TT",
+					name: "Generador",
+					dataPoints: dataPoints5
+
 				}],true)
 
 			dataPoints1=[];
 			dataPoints2=[];
 			dataPoints3=[];
 			dataPoints4=[];
+			dataPoints5=[];
 
 
 		//Draw Pie
@@ -523,6 +559,7 @@ function window2 () {
 				P2[i] = parseFloat(data[i].P2)
 				P3[i] = parseFloat(data[i].P3)
 				P4[i] = parseFloat(data[i].P4)
+				P5[i] = parseFloat(data[i].P5)
 			}
 			}
 		}
@@ -535,31 +572,23 @@ function window2 () {
 			Bateria=0;
 		}
 		Carga = Carga + P4[i];
+		Generador = Generador + P5[i];
 		}
 
 		//PARA LOS DIAS
 		Red = Math.round((Red/(P1.length))*24);
 		Panel = Math.round((Panel/(P2.length))*24);
 		Bateria = Math.round((Bateria/(P3.length))*24);
+		Generador = Math.round((Generador/(P5.length))*24);
 
-		//PARA LAS SEMANAS
-		//Red = Math.round((Red/(P1.length))*168);
-		//Panel = Math.round((Panel/(P2.length))*168);
-		//Bateria = Math.round((Bateria/(P3.length))*168);
-
-		//PARA LOS MESES
-		//Red = Math.round((Red/(P1.length))*730);
-		//Panel = Math.round((Panel/(P2.length))*730);
-		//Bateria = Math.round((Bateria/(P3.length))*730);
-		//console.log(dataPoints);
-
-		dataPointsChar.push({indexLabel: "Red", y: Red, name:"Red" },{indexLabel: "Panel", y: Panel, name:"Panel"}, {indexLabel: "Bateria", y: Bateria, name:"Bateria"});
+		dataPointsChar.push({indexLabel: "Red", y: Red, name:"Red" },{indexLabel: "Panel", y: Panel, name:"Panel"}, {indexLabel: "Bateria", y: Bateria, name:"Bateria"}, {indexLabel: "Generador", y: Generador, name:"Generador"});
 		chart2.render();
 		dataPointsChar = [];
 		Red = 0;
 		Panel = 0;
 		Bateria = 0;
 		Carga = 0;
+		Generador = 0;
 
 //Estados
               for(var i = 0; i < data.length; i++){
@@ -570,9 +599,8 @@ function window2 () {
                   }  
                 }
               }
-            //console.log(state[0])  
             for(i = 0; i <state.length; i++){
-            //Aqui quiero contar cuantas veces está cada estado en el vector de arriba
+            //Aqui se cuenta cuantas veces está cada estado en el vector de arriba
             if(state[i] == 1) {
                 Estado1 = Estado1 + 1;
             } else 
@@ -590,7 +618,7 @@ function window2 () {
                             } 
             } 
  
-            //Aquí el calculo del promedio de los estados y eso 
+            //Aquí el calculo del promedio de los estados 
             S1 = Math.round((Estado1/(state.length))*100);
             S2 = Math.round((Estado2/(state.length))*100);
             S3 = Math.round((Estado3/(state.length))*100);
@@ -598,7 +626,6 @@ function window2 () {
             S5 = Math.round((Estado5/(state.length))*100);
 
             dataPoints.push({indexLabel: "Estado 1", y: S1, name:"Estado 1" },{indexLabel: "Estado 2", y: S2, name:"Estado 2"},{indexLabel: "Estado 3", y: S3, name:"Estado 3"},{indexLabel: "Estado 4", y: S4, name:"Estado 4"}, {indexLabel: "Estado 5", y: S5, name:"Estado 5"}); 
-            //console.log(dataPoints);
             chart3.render();
             dataPoints = [];
             Estado1 = 0;
@@ -615,10 +642,12 @@ function window2 () {
 	var P2 = [];
 	var P3 = [];
 	var P4 = [];
+	var P5 = [];
 	var Red = 0;
 	var Panel = 0;
 	var Bateria = 0;
 	var Carga = 0;
+	var Generador = 0;
 	var tot = 0;
 
 
@@ -634,13 +663,14 @@ function window2 () {
 
 	drawCharts();
 };
-
+//AUN NO LA HE TOCADO
 function window3 () {
 	console.log(Fechas)
 	var dataPoints1 = [];
 	var dataPoints2 = [];
 	var dataPoints3 = [];
 	var dataPoints4 = [];
+	var dataPoints5 = [];
 	var data = [];
 	var dataPointsChar=[];
 	var dataPoints = [];
@@ -711,6 +741,15 @@ function window3 () {
 			name: "Carga",
 			dataPoints: dataPoints4
 
+		},
+			{
+			type: "spline",
+			showInLegend: true,
+			yValueFormatString: "##.00 W",
+			xValueFormatString: "hh:mm:ss TT",
+			name: "Carga",
+			dataPoints: dataPoints4
+
 		}]
 	});
 	var chart2 = new CanvasJS.Chart("chartContainer2",{
@@ -737,7 +776,6 @@ function window3 () {
 	exportEnabled: true,
 	animationEnabled: true,
     theme: "light2",
-    //	colorSet: "Colors",
 	title:{
 			fontFamily:"Poppins",
 			text: "Día calendario",
@@ -782,6 +820,12 @@ function window3 () {
 
 
 				});
+				dataPoints5.push({
+					label: data[i].datetime,
+					y: parseFloat(data[i].P5),
+
+
+				});
 			}
 
 			chart.render();
@@ -819,12 +863,22 @@ function window3 () {
 					name: "Carga",
 					dataPoints: dataPoints4
 
+				},
+					{
+					type: "spline",
+					showInLegend: true,
+					yValueFormatString: "##.00 W",
+					xValueFormatString: "hh:mm:ss TT",
+					name: "Generador",
+					dataPoints: dataPoints5
+
 				}],true)
 
 			dataPoints1=[];
 			dataPoints2=[];
 			dataPoints3=[];
 			dataPoints4=[];
+			dataPoints5=[];
 
 
 		//Draw Pie
@@ -835,6 +889,7 @@ function window3 () {
 				P2[i] = parseFloat(data[i].P2)
 				P3[i] = parseFloat(data[i].P3)
 				P4[i] = parseFloat(data[i].P4)
+				P5[i] = parseFloat(data[i].P5)
 			}
 			}
 		}
@@ -847,31 +902,23 @@ function window3 () {
 			Bateria=0;
 		}
 		Carga = Carga + P4[i];
+		Generador = Generador + P5[i];
 		}
 
 		//PARA LOS DIAS
 		Red = Math.round((Red/(P1.length))*24);
 		Panel = Math.round((Panel/(P2.length))*24);
 		Bateria = Math.round((Bateria/(P3.length))*24);
+		Generador = Math.round((Generador/(P5.length))*24);
 
-		//PARA LAS SEMANAS
-		//Red = Math.round((Red/(P1.length))*168);
-		//Panel = Math.round((Panel/(P2.length))*168);
-		//Bateria = Math.round((Bateria/(P3.length))*168);
-
-		//PARA LOS MESES
-		//Red = Math.round((Red/(P1.length))*730);
-		//Panel = Math.round((Panel/(P2.length))*730);
-		//Bateria = Math.round((Bateria/(P3.length))*730);
-		//console.log(dataPoints);
-
-		dataPointsChar.push({indexLabel: "Red", y: Red, name:"Red" },{indexLabel: "Panel", y: Panel, name:"Panel"}, {indexLabel: "Bateria", y: Bateria, name:"Bateria"});
+		dataPointsChar.push({indexLabel: "Red", y: Red, name:"Red" },{indexLabel: "Panel", y: Panel, name:"Panel"}, {indexLabel: "Bateria", y: Bateria, name:"Bateria"}, {indexLabel: "Generador", y: Generador, name:"Generador"});
 		chart2.render();
 		dataPointsChar = [];
 		Red = 0;
 		Panel = 0;
 		Bateria = 0;
 		Carga = 0;
+		Generador = 0;
 
 		//Estados
               for(var i = 0; i < data.length; i++){
@@ -881,8 +928,7 @@ function window3 () {
                     state[i] = parseFloat(data[i].estado)
                   }  
                 }
-              }
-            //console.log(state[0])  
+              } 
             for(i = 0; i <state.length; i++){
             //Aqui quiero contar cuantas veces está cada estado en el vector de arriba
             if(state[i] == 1) {
@@ -902,7 +948,7 @@ function window3 () {
                             } 
             } 
  
-            //Aquí el calculo del promedio de los estados y eso 
+            //Aquí el calculo del promedio de los estados
             S1 = Math.round((Estado1/(state.length))*100);
             S2 = Math.round((Estado2/(state.length))*100);
             S3 = Math.round((Estado3/(state.length))*100);
@@ -910,7 +956,6 @@ function window3 () {
             S5 = Math.round((Estado5/(state.length))*100);
 
             dataPoints.push({indexLabel: "Estado 1", y: S1, name:"Estado 1" },{indexLabel: "Estado 2", y: S2, name:"Estado 2"},{indexLabel: "Estado 3", y: S3, name:"Estado 3"},{indexLabel: "Estado 4", y: S4, name:"Estado 4"}, {indexLabel: "Estado 5", y: S5, name:"Estado 5"}); 
-            //console.log(dataPoints);
             chart3.render();
             dataPoints = [];
             Estado1 = 0;
@@ -927,10 +972,12 @@ function window3 () {
 	var P2 = [];
 	var P3 = [];
 	var P4 = [];
+	var P5 = [];
 	var Red = 0;
 	var Panel = 0;
 	var Bateria = 0;
 	var Carga = 0;
+	var Generador = 0;
 	var tot = 0;
 
 
@@ -952,6 +999,7 @@ function window4 () {
 	var dataPoints2 = [];
 	var dataPoints3 = [];
 	var dataPoints4 = [];
+	var dataPoints5 = [];
 	var data = [];
 	var dataPointsChar=[];
 	var dataPoints = [];
@@ -1022,6 +1070,15 @@ function window4 () {
 			name: "Carga",
 			dataPoints: dataPoints4
 
+		},
+			{
+			type: "spline",
+			showInLegend: true,
+			yValueFormatString: "##.00 W",
+			xValueFormatString: "hh:mm:ss TT",
+			name: "Generador",
+			dataPoints: dataPoints5
+
 		}]
 	});
 	var chart2 = new CanvasJS.Chart("chartContainer2",{
@@ -1048,7 +1105,6 @@ function window4 () {
 	exportEnabled: true,
 	animationEnabled: true,
     theme: "light2",
-    //	colorSet: "Colors",
 	title:{
 			fontFamily:"Poppins",
 			text: "Última semana",
@@ -1093,6 +1149,12 @@ function window4 () {
 
 
 				});
+				dataPoints5.push({
+					label: data[i].datetime,
+					y: parseFloat(data[i].P5),
+
+
+				});
 			}
 
 			chart.render();
@@ -1130,12 +1192,22 @@ function window4 () {
 					name: "Carga",
 					dataPoints: dataPoints4
 
+				},
+					{
+					type: "spline",
+					showInLegend: true,
+					yValueFormatString: "##.00 W",
+					xValueFormatString: "hh:mm:ss TT",
+					name: "Generador",
+					dataPoints: dataPoints5
+
 				}],true)
 
 			dataPoints1=[];
 			dataPoints2=[];
 			dataPoints3=[];
 			dataPoints4=[];
+			dataPoints5=[];
 
 
 		//Draw Pie
@@ -1146,6 +1218,7 @@ function window4 () {
 				P2[i] = parseFloat(data[i].P2)
 				P3[i] = parseFloat(data[i].P3)
 				P4[i] = parseFloat(data[i].P4)
+				P5[i] = parseFloat(data[i].P5)
 			}
 			}
 		}
@@ -1158,31 +1231,23 @@ function window4 () {
 			Bateria=0;
 		}
 		Carga = Carga + P4[i];
+		Generador = Generador + P5[i];
 		}
 
-		//PARA LOS DIAS
-		//Red = Math.round((Red/(P1.length))*24);
-		//Panel = Math.round((Panel/(P2.length))*24);
-		//Bateria = Math.round((Bateria/(P3.length))*24);
 
 		//PARA LAS SEMANAS
 		Red = Math.round((Red/(P1.length))*168);
 		Panel = Math.round((Panel/(P2.length))*168);
 		Bateria = Math.round((Bateria/(P3.length))*168);
-
-		//PARA LOS MESES
-		//Red = Math.round((Red/(P1.length))*730);
-		//Panel = Math.round((Panel/(P2.length))*730);
-		//Bateria = Math.round((Bateria/(P3.length))*730);
-		//console.log(dataPoints);
-
-		dataPointsChar.push({indexLabel: "Red", y: Red, name:"Red" },{indexLabel: "Panel", y: Panel, name:"Panel"}, {indexLabel: "Bateria", y: Bateria, name:"Bateria"});
+		Generador = Math.round((Generador/(P5.length))*168);
+		dataPointsChar.push({indexLabel: "Red", y: Red, name:"Red" },{indexLabel: "Panel", y: Panel, name:"Panel"}, {indexLabel: "Bateria", y: Bateria, name:"Bateria"}, {indexLabel: "Generador", y: Generador, name:"Generador"});
 		chart2.render();
 		dataPointsChar = [];
 		Red = 0;
 		Panel = 0;
 		Bateria = 0;
 		Carga = 0;
+		Generador = 0;
 
 	//Estados
               for(var i = 0; i < data.length; i++){
@@ -1193,7 +1258,6 @@ function window4 () {
                   }  
                 }
               }
-            //console.log(state[0])  
             for(i = 0; i <state.length; i++){
             //Aqui quiero contar cuantas veces está cada estado en el vector de arriba
             if(state[i] == 1) {
@@ -1221,7 +1285,6 @@ function window4 () {
             S5 = Math.round((Estado5/(state.length))*100);
 
             dataPoints.push({indexLabel: "Estado 1", y: S1, name:"Estado 1" },{indexLabel: "Estado 2", y: S2, name:"Estado 2"},{indexLabel: "Estado 3", y: S3, name:"Estado 3"},{indexLabel: "Estado 4", y: S4, name:"Estado 4"}, {indexLabel: "Estado 5", y: S5, name:"Estado 5"}); 
-            //console.log(dataPoints);
             chart3.render();
             dataPoints = [];
             Estado1 = 0;
@@ -1238,10 +1301,12 @@ function window4 () {
 	var P2 = [];
 	var P3 = [];
 	var P4 = [];
+	var P5 = [];
 	var Red = 0;
 	var Panel = 0;
 	var Bateria = 0;
 	var Carga = 0;
+	var Generador = 0;
 	var tot = 0;
 
 

@@ -28,13 +28,14 @@
 </head>
 
 <body>
+	
 <!--nav menu-->
 	<nav class="navbar navbar-fixed-top" id="header">
         <div class="container-fluid">
 			<div class="navbar-header">
 			
 				<div class="brand">
-					<a href="main_page.html">
+					<a href="index.html">
 						<span class="hidden-xs-down m-r-3" style="margin-left:40px;">Nodo 611</span><span class="lead"  style="margin-left:40px;"><i class="fa fa-home fa-md fa-fw" aria-hidden="true"></i>Principal</span>
                     </a>
                    <!--Cada vez que le das click en uno de los a href de abajo se llaman las funciones que están definidas en graphs.js-->
@@ -75,7 +76,7 @@
 				<br>
 				<br>
 				<p></p>
-				<!--la clase "collapse" junto con el id "calendario" permite que esto aparezca sólo cuando le das click a "Seleccionar día"-->
+				<!--la clase "collapse" junto con el id "calendario" permite que esto aparezca sólo cuando se le da click a "Seleccionar día"-->
 			<div class="container collapse" id="calendario">
 					<div class="row">
 						
@@ -109,7 +110,7 @@
 					</div>
 					</div>
 
-					<!--Aquí defines la sección de gráficas-->
+					<!--Aquí se define la sección de gráficas-->
 					 <section id="graphs">
                             <br>
                             <br>
@@ -132,7 +133,7 @@
                                                 <h4 class="card-title m-b-2">
                                                    Energía (Wh)
 												</h4>
-												<!--Cada uno de los div id="chartContainerX" son para definir el espacio de cada gráfica. Las clases les dan las características de anchura, buscalas-->
+												<!--Cada uno de los div id="chartContainerX" son para definir el espacio de cada gráfica. Las clases les dan las características de anchura-->
                                                 <div id="chartContainer2" style="height: 300px; width: 100%; margin: 0 auto;max-width: 1280px"></div>
                                             </div>
                                             <br>
@@ -159,7 +160,7 @@
 	<script src="assets/js/graphs.js">
             window1()
         </script>
-<!-- Aquí comienza el datetimepicker. Con esto seleccionas los días en el calendario-->
+<!-- Aquí comienza el datetimepicker. Con esto se selecciona los días en el calendario-->
 	 
 	  <script type="text/javascript" src="assets/bootstrapv3/bootstrap/js/bootstrap.min.js"></script>
 	  <script type="text/javascript" src="assets/bootstrapv3/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
@@ -171,7 +172,7 @@
 	  var Fechas=[];
 	  </script>
 	  <script type="text/javascript">
-	 //esto lo hizo Julián, no c bro disculpa
+	 
 	 $(function () {
 		  $('#datetimepicker6').datetimepicker({
 		  language:  'es',
@@ -203,7 +204,6 @@
 		  startDate: "22-09-2019"
 		  });
 		  $("#datetimepicker6").on("changeDate", function (e) {
-			  console.log(e.date.getDate())
 			  $('#datetimepicker7').datetimepicker('setStartDate', e.date);
 			  S6=true
 			  var year = e.date.getFullYear();

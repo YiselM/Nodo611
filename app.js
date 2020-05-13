@@ -28,18 +28,18 @@ con.connect(function (err) {
 
 
 // querys 
-const quer1 = "SELECT P1, P2, P3, P4,estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
+const quer1 = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
     "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 7 HOUR)";
 
-const querD = "SELECT P1, P2, P3, P4, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
+const querD = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
     "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 1 DAY)";
 
-const querS = "SELECT P1, P2, P3, P4, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
+const querS = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
     "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 1 WEEK)";
 
 const querEstados = "SELECT estado FROM datos ORDER BY id DESC LIMIT 1";
 
-const querActuales = "SELECT P1, P2, P3, P4 FROM datos ORDER BY id DESC LIMIT 1";
+const querActuales = "SELECT P1, P2, P3, P4, P5 FROM datos ORDER BY id DESC LIMIT 1";
 
 // ----------------------------------
 app.get('/Generar', function (req, res) {
@@ -58,8 +58,6 @@ app.get('/Generar', function (req, res) {
 })
 app.get('/GenerarDay', function (req, res) {
     // console.log('Generando')
-
-
     con.query(querD, function (err, result, fields) {
         if (err) throw err;
         //console.log(result);
@@ -72,8 +70,6 @@ app.get('/GenerarDay', function (req, res) {
 })
 app.get('/GenerarWeek', function (req, res) {
     // console.log('Generando')
-
-
     con.query(querS, function (err, result, fields) {
         if (err) throw err;
         //console.log(result);
@@ -92,12 +88,12 @@ app.get('/GenerarCal', function (req, res) {
     console.log(Fechas)
 
 
-    const querC = "SELECT P1, P2, P3, P4, estado, CONCAT_WS(' ', fecha, hora) " +
+    const querC = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) " +
         "AS datetime FROM datos WHERE fecha BETWEEN '" + Fechas[0] + "' AND '" + Fechas[1] + "' ORDER BY fecha ASC, hora ASC";
 
     con.query(querC, function (err, result, fields) {
         if (err) throw err;
-        console.log(result);
+        //console.log(result);
         //console.log(JSON.stringify(result))
         res.send(JSON.stringify(result));
 
@@ -107,9 +103,7 @@ app.get('/GenerarCal', function (req, res) {
 });
 
 app.get('/GenerarEstados', function (req, res) {
-    console.log('Generando')
-
-
+    //console.log('Generando')
     con.query(querEstados, function (err, result, fields) {
         if (err) throw err;
         //console.log(result);
@@ -143,7 +137,7 @@ app.get('/SwitchT', (req, res) => {
         res.json({
             ok: true
         });
-
+        
     });
 });
 

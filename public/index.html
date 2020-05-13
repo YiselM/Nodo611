@@ -24,7 +24,7 @@
     <script src="assets/tether/tether.min.js"></script>
     <script src="assets/bootstrap/bootstrap4-alpha3.min.js"></script>
     <!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
-
+    
     <script src="assets/web-analytics/overview.js"></script>
     <script type="text/javascript" src="/assets/canvas/canvasjs.min.js"></script>
 
@@ -77,7 +77,7 @@
                             Mes</p>
                         <p class="card-text" id="mes"
                             style="text-align:left;font-weight: 500; font-size: 14px;line-height: 21px; color: #A8A8A8; position: absolute;width: 57px;height: 24px;left: 180px;top: 35px;">
-                        </p>
+                            </p>
                         <div class="rectangle">
                         </div>
                         <p class="card-text"
@@ -198,7 +198,7 @@
                                     if (modo == true) {
                                         $('#clever').prop("checked", true);
                                         //console.log("ON");
-                                        $.get('/SwitchT', function (data, status) { });
+                                        $.get('/SwitchT', function (data, status) {});
 
                                     };
 
@@ -206,7 +206,7 @@
                                     if (modo == false) {
                                         $('#clever').prop("checked", false);
                                         //console.log("OFF");
-                                        $.get('/SwitchF', function (data, status) { });
+                                        $.get('/SwitchF', function (data, status) {});
 
                                     };
                                 } else {
@@ -214,7 +214,7 @@
                                     if (modo == true) {
                                         $('#clever').prop("checked", false);
                                         //console.log("OFF");
-                                        $.get('/SwitchF', function (data, status) { });
+                                        $.get('/SwitchF', function (data, status) {});
 
 
                                     };
@@ -334,7 +334,7 @@ top: 550px;
 
                     <h2 class="card-text" id="P51"
                         style="position: relative;top: 3px; color: #F25555;font-weight: 600;font-size: 22px;line-height: 32px; text-align: center">
-                        0</h2>
+                        </h2>
                 </div>
             </div>
             <h2 class="card-text"
@@ -481,6 +481,7 @@ top: 370px;
         var div2 = document.createElement('div2');
         var div3 = document.createElement('div3');
         var div4 = document.createElement('div4');
+        var div5 = document.createElement('div5');
         var P11 = document.getElementById('P11');
         var P21 = document.getElementById('P21');
         var P31 = document.getElementById("P31");
@@ -490,10 +491,12 @@ top: 370px;
         var P2 = [];
         var P3 = [];
         var P4 = [];
+        var P5 = [];
         var Panel = 0;
         var Red = 0;
         var Bateria = 0;
         var Carga = 0;
+        var Generador = 0;
 
         repetir()
         setInterval(repetir, 3000);
@@ -507,6 +510,7 @@ top: 370px;
             Panel = parseFloat(data[0].P2).toFixed(2)
             Bateria = parseFloat(data[0].P3).toFixed(2)
             Carga = parseFloat(data[0].P4).toFixed(2)
+            Generador = parseFloat(data[0].P5).toFixed(2)
             div1.innerHTML = Red;
             P11.appendChild(div1);
             div2.innerHTML = Panel;
@@ -520,6 +524,8 @@ top: 370px;
             P31.appendChild(div3);
             div4.innerHTML = Carga;
             P41.appendChild(div4);
+            div5.innerHTML= Generador;
+            P51.appendChild(div5);
         }
 
         // Se devuelve a estado 1 después de salir del 5
@@ -530,7 +536,7 @@ top: 370px;
 
         function addData1(data) {
             Estado1 = parseFloat(data[0].estado);
-            div6.innerHTML = Estado1;
+            div6.innerHTML = Estado1; 
             Estado.appendChild(div6);
             return Estado1
         };
@@ -562,5 +568,4 @@ top: 370px;
     </script>
 
 </body>
-
 </html>

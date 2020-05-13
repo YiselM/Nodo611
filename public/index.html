@@ -413,6 +413,7 @@ top: 370px;
             localStorage.setItem('message', validation);
         });
         setInterval(() => {
+            //arreglar 
             localStorage.removeItem('message');
         }, 60000);
 
@@ -423,7 +424,7 @@ top: 370px;
             modo5();
             factura();
             Points();
-            //Asunto: ¿debería ser ==2 o >= 2?
+            
             if (cont >= 2) {
                 //Si el estado esta en 5 el switch se pone como ON
                 //console.log(div6.innerHTML == "5")

@@ -407,7 +407,7 @@ top: 370px;
     <!-- aquí estan la mayor parte de las funciones que hacen que la página sea dinámica--->
     <script>
         window.addEventListener('message', function (e) {
-            console.log("mensaje entrando:" + e.data)
+            //console.log("mensaje entrando:" + e.data)
             const validation = e.data;
             localStorage.removeItem('message');
             localStorage.setItem('message', validation);

@@ -436,7 +436,6 @@ top: 370px;
 
         };
 
-
         // Coloca el switch como disabled dependiendo de si está en modo 5 o no
         // Y además si está logueado coloca como disabled para que no se realizen acciones
         function modo5() {
@@ -549,10 +548,11 @@ top: 370px;
             PotRed = 0;
             PotCarga = 0;
             for (var i = 0; i < data.length; i++) {
-                //* (6 / 3600)
-                PotRed = parseFloat(PotRed) + parseFloat(data[i].P1) 
+                PotRed = parseFloat(PotRed) + parseFloat(data[i].P1)
                 PotCarga = parseFloat(PotCarga) + parseFloat(data[i].P4)
             }
+            console.log(PotRed)
+            console.log(PotCarga)
             Precio = 0.500;
             //Estimado sería sin el sistema
             Estimado = Math.round(PotCarga * Precio);

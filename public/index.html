@@ -547,23 +547,26 @@ top: 370px;
         }
 
         function addData3(data) {
+            Red = 0;
+            Carga = 0;
             //Esto recoge los datos (Semana o mes)
             for (var i = 0; i < data.length; i++) {
-                Red = parseFloat(Red) + parseFloat(data[i].P1 * (6 /
-                    3600)) // Cada 6 o 7 segundos le llega un dato a la BD
-                Carga = parseFloat(Carga) + parseFloat(data[i].P4 * (6 / 3600))
+                //* (6 / 3600)
+                Red = parseFloat(Red) + parseFloat(data[i].P1) // Cada 6 o 7 segundos le llega un dato a la BD
+                Carga = parseFloat(Carga) + parseFloat(data[i].P4)
             }
 
             Precio = 0.39036;
-            Estimado = Math.round(Red * Precio);
-            Plena = Math.round(Carga * Precio);
+            //Estimado sería sin el sistema
+            Estimado = Math.round(Carga * Precio);
+            //Plena seria con nuestro sistema
+            Real = Math.round(Red * Precio);
             div7.innerHTML = Estimado;
-            div8.innerHTML = Plena;
+            div8.innerHTML = Real;
             costo.appendChild(div7);
             real.appendChild(div8);
-
-            Red = 0;
-            Carga = 0;
+            //Red = 0;
+            //Carga = 0;
         }
     </script>
 

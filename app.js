@@ -23,7 +23,7 @@ app.get("/", function (req, res) {
     database: "proyecto_diseno"
 }); */
 var con = mysql.createConnection({
-    host: "http://database-1.cbelsi1ervaq.us-east-1.rds.amazonaws.com/",
+    host: "database-1.cbelsi1ervaq.us-east-1.rds.amazonaws.com",
     user: "adminpardo",
     password: "Pfestacion123!",
     database: "nodo"

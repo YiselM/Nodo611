@@ -16,12 +16,19 @@ app.get("/", function (req, res) {
     res.rendFile("index.html")
 })
 // --------------------------------------
-var con = mysql.createConnection({
+/* var con = mysql.createConnection({
     host: "db4free.net",
     user: "baenav",
     password: "qwertyuiop",
     database: "proyecto_diseno"
+}); */
+var con = mysql.createConnection({
+    host: "http://database-1.cbelsi1ervaq.us-east-1.rds.amazonaws.com/",
+    user: "adminpardo",
+    password: "Pfestacion123!",
+    database: "nodo"
 });
+
 con.connect(function (err) {
     if (err) throw err;
 });

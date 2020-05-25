@@ -41,7 +41,7 @@ const quer1 = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS
 const querD = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
     "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 1 DAY)";
 
-const querS = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos WHERE YEARWEEK(`fecha`, 1) = YEARWEEK(CURDATE(), 1)";
+const querS = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos WHERE YEARWEEK(fecha,1)=YEARWEEK(NOW(),1)-1";
 //"SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
 //    "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 1 WEEK)";
 

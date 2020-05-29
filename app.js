@@ -38,8 +38,9 @@ con.connect(function (err) {
 const quer1 = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
     "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 7 HOUR)";
 
-const querD = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
-    "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 1 DAY)";
+const querD = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos WHERE fecha >= CURRENT_DATE()";
+//"SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
+//    "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 1 DAY)";
 
 const querS = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos WHERE  YEARWEEK(fecha, 1) = YEARWEEK(CURDATE(), 1)";
 //SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos WHERE YEARWEEK(fecha,1)=YEARWEEK(NOW(),1)-1";
@@ -158,6 +159,40 @@ app.get('/SwitchF', (req, res) => {
         res.json({
             ok: true
         });
+
+    });
+});
+
+//Esto es para activar y desactivar la red
+app.get('/SwitchRT', (req, res) => {
+    const REDT = "INSERT INTO ToCinco (To5) VALUES (1) ";
+    console.log("activada")
+    con.query(REDT, function (err, result, fields) {
+        if (err) throw err;
+        res.json({
+            ok: true
+        });
+
+    });
+});
+
+app.get('/SwitchRF', (req, res) => {
+    const REDF = "INSERT INTO ToCinco (To5) VALUES (0) ";
+    console.log("desactivada")
+    con.query(REDF, function (err, result, fields) {
+        if (err) throw err;
+        res.json({
+            ok: true
+        });
+
+    });
+});
+
+app.get('/RED', (req, res) => {
+    const RED = "SELECT To5 FROM ToCinco ORDER BY id DESC LIMIT 1";
+    con.query(RED, function (err, result, fields) {
+        if (err) throw err;
+        res.send(JSON.stringify(result));
 
     });
 });

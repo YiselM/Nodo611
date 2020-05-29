@@ -337,9 +337,9 @@ border-radius: 12px;
 .cd_autorizo{
 
 position: absolute;
-width: 180px;
+width: 170px;
 height: 90px;
-left: 390px;
+left: 300px;
 top: 100px;
 
 background: #F1F1F1;
@@ -348,6 +348,19 @@ border-color: #000000;
 
 }
 
+.cd_autorizo_red{
+
+  position: absolute;
+  width: 170px;
+  height: 90px;
+  left: 500px;
+  top: 100px;
+  
+  background: #F1F1F1;
+  border-radius: 12px;
+  border-color: #000000;
+  
+  }
 .cd_modos2{
 
 position: absolute;

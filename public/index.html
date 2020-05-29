@@ -160,7 +160,43 @@
                     </div>
                 </div>
 
+                <div class="cd_autorizo_red">
+                    <div class="card-body">
+                        <p class="card-text" style="text-align:left;font-weight: 600; font-size: 16px;
+                                                 line-height: 30px; 
+                                                color: #34495E;position: absolute;
+                                                width: 250px;
+                                                height: 24px;
+                                                left: 25px;
+                                                top: 10px;">RED</p>
+                        <h2 id="mensaje" style="color: A8A8A8; font-size: 12px;position: absolute;
+                                                width: 250px;
+                                                height: 24px;
+                                                left: 105px;
+                                                top: 18px;"></h2>
+                    <!--Nuevo boton de red-->
+                    <div class="switch" style="position: absolute;width: 250px;height: 24px;left: 25px;top: 50px;"
+                    name="confimred">
+                    <label>
+                        OFF
+                        <input id="confirmred" type="checkbox">
+                        <span class="lever"></span>
+                        ON
+                    </label>
+                    <script>
+                        var redon
+                        $('#confirmred').on('change', function () {
+                            if (this.checked) {
+                                $.get('/SwitchRT', function (data, status) {});
+                            } else {
+                                $.get('/SwitchRF', function (data, status) {});
+                            }
+                        });
+                    </script>
+                </div>
+                </div>
 
+                </div>
                 <div class="cd_autorizo" id="switchy">
                     <div class="card-body">
 
@@ -186,7 +222,7 @@
                                 <span class="lever"></span>
                                 ON
                             </label>
-                        </div>
+
                         <!--Este script activa y desactiva el switch dependiendo de si está en Modo 5 o no. El checkbox tiene el ID "clever"-->
                         <script>
                             var mensaje = document.getElementById('mensaje');
@@ -431,6 +467,14 @@ top: 370px;
                 if (div6.innerHTML == "5") {
                     $('#clever').prop("checked", true);
                 };
+
+                redon = jQuery.getJSON('/RED',RedON);
+                function RedON(data) {
+                    if (data[0].To5 == "1") {
+                        //Falla porque no estoy leyendo desde el backend
+                        $('#confirmred').prop("checked", true);
+                    };
+                }
             }
             cont = cont + 1
 
@@ -440,7 +484,7 @@ top: 370px;
         // Y además si está logueado coloca como disabled para que no se realizen acciones
         function modo5() {
             const validation = localStorage.getItem('message') == "true" ? true : false
-            console.log(validation)
+            //console.log(validation)
             if (validation) {
                 //console.log( $("#estados").text() == 5)
                 if ($("#estados").text() == 4 || $("#estados").text() == 5) {
@@ -551,8 +595,8 @@ top: 370px;
                 PotRed = parseFloat(PotRed) + parseFloat(data[i].P1)
                 PotCarga = parseFloat(PotCarga) + parseFloat(data[i].P4)
             }
-            console.log(PotRed)
-            console.log(PotCarga)
+            //console.log(PotRed)
+            //console.log(PotCarga)
             Precio = 0.500;
             //Estimado sería sin el sistema
             Estimado = Math.round(PotCarga * Precio);

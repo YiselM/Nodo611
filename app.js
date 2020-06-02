@@ -38,9 +38,9 @@ con.connect(function (err) {
 const quer1 = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
     "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 7 HOUR)";
 
-const querD = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos WHERE fecha >= CURRENT_DATE()";
-//"SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
-//    "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 1 DAY)";
+const querD = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos " +
+    "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 1 DAY)";
+
 
 const querS = "SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos WHERE  YEARWEEK(fecha, 1) = YEARWEEK(CURDATE(), 1)";
 //SELECT P1, P2, P3, P4, P5, estado, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos WHERE YEARWEEK(fecha,1)=YEARWEEK(NOW(),1)-1";
@@ -55,8 +55,6 @@ const querActuales = "SELECT P1, P2, P3, P4, P5 FROM datos ORDER BY id DESC LIMI
 // ----------------------------------
 app.get('/Generar', function (req, res) {
     // console.log('Generando')
-
-
     con.query(quer1, function (err, result, fields) {
         if (err) throw err;
         // console.log(result);

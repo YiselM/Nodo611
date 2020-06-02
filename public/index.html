@@ -449,7 +449,6 @@ top: 370px;
             localStorage.setItem('message', validation);
         });
         setInterval(() => {
-            //arreglar 
             localStorage.removeItem('message');
         }, 60000);
 
@@ -463,7 +462,6 @@ top: 370px;
             
             if (cont >= 2) {
                 //Si el estado esta en 5 el switch se pone como ON
-                //console.log(div6.innerHTML == "5")
                 if (div6.innerHTML == "5") {
                     $('#clever').prop("checked", true);
                 };
@@ -471,7 +469,6 @@ top: 370px;
                 redon = jQuery.getJSON('/RED',RedON);
                 function RedON(data) {
                     if (data[0].To5 == "1") {
-                        //Falla porque no estoy leyendo desde el backend
                         $('#confirmred').prop("checked", true);
                     };
                 }
@@ -486,14 +483,11 @@ top: 370px;
             const validation = localStorage.getItem('message') == "true" ? true : false
             console.log(validation)
             if (validation) {
-                //console.log( $("#estados").text() == 5)
                 if ($("#estados").text() == 4 || $("#estados").text() == 5) {
-                    //console.log("Permitido")
                     $("#clever").prop("disabled", false);
                     $("#switchy").removeClass("disable1");
 
                 } else if (($("#estados").text() != 4) || ($("#estados").text() != 5)) {
-                    //console.log("No permitido")
                     $("#switchy").addClass("disable1");
                     $("#clever").attr("disabled", true);
                 }
@@ -501,17 +495,6 @@ top: 370px;
                 $("#switchy").addClass("disable1");
                 $("#clever").attr("disabled", true);
             }
-            //Esto estaba inicialmente
-            /* if (($("#estados").text() != '4') || ($("#estados").text() != '5')) {
-                $("#switchy").addClass("disable1");
-                $("#clever").attr("disabled", true);
-
-            };
-
-            if (($("#estados").text() == '4') || ($("#estados").text() == '5')) {
-                $("#clever").prop("disabled", false);
-                $("#switchy").removeClass("disable1");
-            }; */
         };
 
         var Estado = document.getElementById('estados');
@@ -595,8 +578,6 @@ top: 370px;
                 PotRed = parseFloat(PotRed) + parseFloat(data[i].P1)
                 PotCarga = parseFloat(PotCarga) + parseFloat(data[i].P4)
             }
-            //console.log(PotRed)
-            //console.log(PotCarga)
             Precio = 0.500;
             //Estimado sería sin el sistema
             Estimado = Math.round(PotCarga * Precio);

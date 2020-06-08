@@ -1,0 +1,5 @@
+Este es el código fuente de la plataforma del Nodo 611. 
+Para desplegarlo, en primer lugar, es necesario tener instalado Node.js (https://nodejs.org/es/) en el sistema y algún terminal que permita la ejecución de comandos vía. 
+Primero, se deberá descargar las dependencias y librerías que esta necesita. Se puede utilizar la consola de terminal, ejecutando el comando npm install sobre la carpeta principal.
+Para iniciar la aplicación se debe de ejecutar el comando node app.js o en su defecto, npm start.
+Dentro del mismo código, encontrarás comentarios utiles sobre qué hace cada porción de este, así como los datos de la base de datos utilizada en app.js
